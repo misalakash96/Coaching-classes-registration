@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'classes/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome, {{ user.username }}</h1>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </div>
+        <h2>Available Courses</h2>
+        <ul>
+            {% for course in courses %}
+            <li>
+                {{ course.name }} - ${{ course.fees }}
+                {% if course.id in registered_courses %}
+                <span>Registered</span>
+                {% else %}
+                <a href="{% url 'register_course' course.id %}">Register</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <h2>Your Registrations</h2>
+        <ul>
+            {% for registration in registrations %}
+            <li>{{ registration.course.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

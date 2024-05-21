@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Registrations</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'classes/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registrations</h1>
+            <a href="{% url 'dashboard' %}" class="logout">Back to Dashboard</a>
+        </div>
+        <ul>
+            {% for registration in registrations %}
+            <li>{{ registration.student.username }} - {{ registration.course.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

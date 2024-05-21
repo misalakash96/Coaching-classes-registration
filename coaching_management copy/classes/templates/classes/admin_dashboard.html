@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'classes/css/style.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="header mb-4">
+            <h1 class="text-primary">Welcome, {{ user.username }}</h1>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+        <p>You are logged in as an admin.</p>
+        <h2 class="mt-4">Courses</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Faculty Name</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.faculty_name }}</td>
+                    <td>{{ course.duration }}</td>
+                    <td><a href="{% url 'delete_course' course.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add_course' %}" class="btn btn-primary mt-3">Add Course</a>
+
+        <h2 class="mt-5">Registrations</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Student</th>
+                    <th scope="col">Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registration in registrations %}
+                <tr>
+                    <td>{{ registration.student.username }}</td>
+                    <td>{{ registration.course.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
