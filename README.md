@@ -34,3 +34,4 @@ This is a Course Management System built using Django. The system includes funct
    ```bash
    git clone https://github.com/yourusername/course-management-system.git
    cd course-management-system
+   python manage.py runserver
